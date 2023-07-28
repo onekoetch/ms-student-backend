@@ -1,6 +1,5 @@
 FROM openjdk:17-alpine
 
-LABEL maintainer="AWERIMO@safaricom.co.ke"
 
 EXPOSE 8090
 
