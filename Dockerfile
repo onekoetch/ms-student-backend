@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+
 # For Java 11, try this
 FROM fabric8/java-alpine-openjdk11-jre:1.9.0
 EXPOSE  8090
