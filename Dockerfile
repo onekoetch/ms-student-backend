@@ -1,14 +1,16 @@
 FROM openjdk:17-alpine
+# For Java 11, try this
+FROM fabric8/java-alpine-openjdk11-jre:1.9.0
+EXPOSE  8090
 
 
-EXPOSE 8090
+ARG JAR_FILE=target/ms-student-backend-0.0.1-SNAPSHOT.jar 
 
-VOLUME /tmp
+# cd /opt/app
+WORKDIR /opt/app
 
-ADD target/ms-student-backend-0.0.1-SNAPSHOT.jar   ms-student-backend
-RUN /bin/sh -c 'touch /ms-student-backend.jar'
+COPY ${JAR_FILE} app.jar
 
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+ENTRYPOINT ["java","-jar","app.jar"]
 
-ENTRYPOINT ["java","-Xmx256m", "-XX:+UseG1GC", "-Djava.security.egd=file:/dev/./urandom","-jar","/ms-student-backend.jar"]
